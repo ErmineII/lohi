@@ -1,2 +1,1 @@
-# lohi
-Created with CodeSandbox
+# Lohi
