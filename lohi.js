@@ -132,6 +132,32 @@ try {
       a.click();
     };
     window.lohi = { openpage: page, wiki: wiki, sync: sync };
+
+    const upl = document.getElementById("upload");
+
+    document.getElementById("ulw").onclick = function () {
+      if (
+        !wiki ||
+        window.confirm("This will override your previous wiki, are you sure?")
+      )
+        upl.parentElement.hidden = false;
+    };
+
+    document.getElementById("finishupload").onclick = function () {
+      if (upl.files.length <= 0) {
+        return false;
+      }
+
+      var fr = new FileReader();
+
+      fr.onload = function (e) {
+        wiki = JSON.parse(e.target.result);
+        sync();
+        upl.parentElement.hidden = true;
+      };
+
+      fr.readAsText(upl.files.item(0));
+    };
   })();
 } catch (e) {
   console.log(e);
